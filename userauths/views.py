@@ -26,6 +26,12 @@ class ValidateLoginView(APIView):
             })
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class UpdateProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
 
 class UpdateContactView(APIView):
     permission_classes = [IsAuthenticated]
